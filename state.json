@@ -1,11 +1,11 @@
 {
-  "check_time": "2026-11-24T23:53:45Z",
+  "check_time": "2026-11-25T08:33:15Z",
   "target": "ByShiNo/tvbox-selfheal",
   "target_workflow": "heal.yml",
   "max_age_hours": 8.0,
   "has_token": true,
-  "last_run": "2026-11-24T19:52:13Z",
-  "age_hours": 4.03,
+  "last_run": "2026-11-25T03:54:47Z",
+  "age_hours": 4.64,
   "conclusion": "success",
   "status": "completed",
   "health": "HEALTHY"
