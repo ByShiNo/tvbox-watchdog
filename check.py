@@ -15,7 +15,7 @@ import urllib.request
 
 TARGET_REPO = os.environ.get("TARGET_REPO", "ByShiNo/tvbox-selfheal")
 TARGET_WORKFLOW = os.environ.get("TARGET_WORKFLOW", "heal.yml")
-MAX_AGE_HOURS = float(os.environ.get("MAX_AGE_HOURS", "8"))
+MAX_AGE_HOURS = float(os.environ.get("MAX_AGE_HOURS", "20"))
 TOKEN = os.environ.get("GH_TOKEN", "")
 
 
