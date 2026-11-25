@@ -1,14 +1,15 @@
 name: TVBox 互监控 Watchdog
 
 # B 仓监控 A 仓（tvbox-selfheal）的 Actions 心跳。
-# A 停摆（workflow 被禁用 / 连续 8h 无运行）时，自动 enable + dispatch 把 A 拉起来。
+# A 停摆（workflow 被禁用 / 连续 20h 无运行）时，自动 enable + dispatch 把 A 拉起来。
 # 本 workflow 每轮都写 state.json（check_time 每轮不同）→ 每轮 commit → B 仓永远活跃，
 # 同样规避 GitHub 的 60 天闲置禁用规则。A、B 互相独立保活。
 
 on:
   schedule:
-    # 每 3 小时第 15 分（UTC），与 A 仓的整点错峰，避免同时段拥塞。
-    - cron: '15 */3 * * *'
+    # 每 6 小时第 43 分（UTC），冷门分钟 + 与 A 仓（17 */4）错峰，避免排队拥塞。
+    # UTC 01:43/07:43/13:43/19:43 = 北京 09:43/15:43/21:43/03:43
+    - cron: '43 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -31,7 +32,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TARGET_REPO: ByShiNo/tvbox-selfheal
           TARGET_WORKFLOW: heal.yml
-          MAX_AGE_HOURS: '8'
+          MAX_AGE_HOURS: '20'
         run: python check.py
 
       - name: 保活提交（每轮时间戳不同，保证仓库活跃）
